@@ -1,3 +1,3 @@
 # QR-code
 
-Qr code app using API from goqr.me
+Qr code, JS app using API from goqr.me
