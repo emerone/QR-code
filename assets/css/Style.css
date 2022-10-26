@@ -87,15 +87,15 @@ main > div:first-of-type > button:is(:hover, :focus-visible) {
   width: 100%;
 }
 
-.write input {
+div.write input {
   padding: .75rem 1rem ;
   background: #0000;
   border: 1px #0004 solid;
   border-radius: .125rem 0% 0% .125rem;
-  width: 20rem;
+  width: 100%;
 }
 
-.write button {
+div.write button {
   padding: .75rem 1.4rem .7rem;
   border: 1px #0002 solid;
   border-left: none;
@@ -104,16 +104,22 @@ main > div:first-of-type > button:is(:hover, :focus-visible) {
   transition: all .2s ease;
   cursor: pointer;
   color: #000c;
+  transition: all .2 ease;
 }
 
-.write button:is(:focus-visible, :hover) {
+div.write button:is(:focus-visible, :hover) {
   background: var(--bg);
   opacity: .9;
   color: var(--color);
 }
 
-.write > div {
+div.write.not-valid button {
+  opacity: .4;
+}
+
+div.write > div {
   display: flex;
+  width: min(100%, 20rem);
 }
 
           
@@ -127,24 +133,6 @@ main > div:first-of-type > button:is(:hover, :focus-visible) {
 }
 
           /* Responsive */
-
-@media screen and (max-width:1024px) {
-  html{
-    font-size: 14px;
-  }
-}
-
-@media screen and (max-width:826px) {
-  html{
-    font-size: 3px;
-  }
-}
-
-@media screen and (max-width:632px) {
-  html{
-    font-size: 3px;
-  }
-}
 
 @media screen and (min-width:calc(1920px * calc(1 + 1/2) - 100px)) {
   html{
@@ -185,15 +173,10 @@ main > div:first-of-type > button:is(:hover, :focus-visible) {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--bg);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #b48c9e;
 }

@@ -16,27 +16,29 @@
     <main class="write">
         <h1>Write / Read QR code</h1>
 
-        <p>Enter text or url to creat or read QR code</p>
+        <p>Enter text or url to create or read QR code <br> (can not use '&')</p>
 
         <div>
             <button>Write</button>
             <button>Read</button>
         </div>
 
-        <div class="not-active write" action="">
+        <div class="form not-active not-valid write" action="">
             <div>
-                <input type="text" type="button" name="qrRead" id="qrRead" placeholder="Enter text">    
+                <input required type="text" type="button" placeholder="Enter text">    
                 <button type="button">Valid</button>
             </div>
             <img src="" alt="QRcode">
         </div>
 
-        <div class="read" action="">
+        <div class="form read" action="">
             <div>
-                <input type="" name="qrRead" id="qrRead">    
+                <input type="file" accept="image/*" hidden>  
+                <div class="input">
+                    <p>Choose any image</p>
+                </div>  
                 <button type="button">Valid</button>
             </div>
-            <img src="" alt="QRcode">
         </div>
     </main>
     
