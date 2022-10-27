@@ -5,6 +5,14 @@
   outline: none;
 }
 
+*::selection {
+  background: #96526f22;
+}
+
+img::selection {
+  background: #0000;
+}
+
 button{
   display: inline-flex;
   align-items: center;
@@ -25,6 +33,7 @@ body{
 
 main {
   background: #f9f9f9;
+  height: auto;
   border-radius: .125rem;
   width: min(100%, 30rem);
   text-align: center;
@@ -34,6 +43,7 @@ main {
   padding: 1rem;
   margin: 0% 1rem;
   box-shadow: #0002 0 0 .5rem;
+  transition: all .3s ease;
 }
 
 main > * {
@@ -44,6 +54,7 @@ main > * {
 main.write .read {
   display: none;
 }
+
 main.read .write {
   display: none;
 }
@@ -75,7 +86,7 @@ main > div:first-of-type > button:is(:hover, :focus-visible) {
   color: var(--color);
 }
 
-.not-active img {
+.write .not-active img {
   display: none;
 }
 
@@ -87,6 +98,8 @@ main > div:first-of-type > button:is(:hover, :focus-visible) {
   width: 100%;
 }
 
+  /* Write part */
+
 div.write input {
   padding: .75rem 1rem ;
   background: #0000;
@@ -95,7 +108,7 @@ div.write input {
   width: 100%;
 }
 
-div.write button {
+div:is(.write, .read) button {
   padding: .75rem 1.4rem .7rem;
   border: 1px #0002 solid;
   border-left: none;
@@ -107,7 +120,7 @@ div.write button {
   transition: all .2 ease;
 }
 
-div.write button:is(:focus-visible, :hover) {
+div:is(.write, .read) button:is(:focus-visible, :hover) {
   background: var(--bg);
   opacity: .9;
   color: var(--color);
@@ -117,11 +130,58 @@ div.write.not-valid button {
   opacity: .4;
 }
 
+div.read > .not-active ~ button {
+  opacity: .4;
+}
+
 div.write > div {
   display: flex;
   width: min(100%, 20rem);
 }
 
+  /* read part */
+
+.read .input {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: .125rem;
+  cursor: pointer;
+}
+
+.read .input.not-active {
+  gap: 0rem;
+  padding: 1rem;
+  border: 2px dashed var(--bg);
+}
+
+.read .input *::selection{
+  background: #0000;
+}
+
+.read img {
+  color: #000c;
+  max-width: 100%;
+  max-height: 15rem;
+}
+
+.read .input > * {
+  margin: 0%;
+}
+
+.read .input.not-active img {
+  transform: scale(3);
+  margin: 1rem 0%;
+}
+
+.read .input p {
+  /* display: none; */
+}
+
+.read .input.not-active p {
+  display: unset;
+}
           
           /* Animation */
 

@@ -1,14 +1,14 @@
     // Menu 
-const write = document.querySelector("button")
-const read = document.querySelector('button:nth-of-type(2)')
+const writeBtn = document.querySelector("button")
+const readBtn = document.querySelector('button:nth-of-type(2)')
 const main = document.querySelector('main')
 
-write.addEventListener('click', () => {
+writeBtn.addEventListener('click', () => {
     main.classList.add('write')
     main.classList.remove('read')
 })
 
-read.addEventListener('click', () => {
+readBtn.addEventListener('click', () => {
     main.classList.add('read')
     main.classList.remove('write')
 })
@@ -23,21 +23,19 @@ const formW = document.querySelector('div.write')
 
 const writeF = (e) => {
 
-    // API used from: goqr.me
-    data = inpW.value.replace(/&/g, '')
-    if (data != '')     { formW.classList.remove("not-valid") }
-    if (data == '')     { formW.classList.add("not-valid")}
-    if (data != false) 
-    if (data == false) 
-
-    console.log(data)
     function url() { return `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${data}` }
 
     function imgShow() {
         formW.classList.remove('not-active')
         imgW.src = url()
-        console.log(url())
     }
+
+    // API used from: goqr.me
+
+    // removing "&" to avoid bug 
+    data = inpW.value.replace(/&/g, '')
+    if (data != '') { formW.classList.remove("not-valid") }
+    if (data == '') { formW.classList.add("not-valid")}
 
     if (e.target.nodeName == 'BUTTON' && data != false){
         imgShow()
@@ -51,3 +49,24 @@ const writeF = (e) => {
 inpW.addEventListener('keydown', writeF)
 inpW.addEventListener('input', writeF)
 btnW.addEventListener('click', writeF)
+
+    // Read part
+
+const inpR = document.querySelector('.read input')
+const divR = document.querySelector('.read div')
+const btnR = document.querySelector('.read button')
+const imgR = document.querySelector('.read img')
+const read = document.querySelector('.read')
+
+const chargeFile = (e) => {
+    console.log(e.target.files[0])
+    file = e.target.files[0]
+    if (!file) return
+
+    imgR.src = URL.createObjectURL(file)
+    divR.classList.remove('not-active')
+}
+
+divR.addEventListener('click', () => inpR.click() )
+
+inpR.addEventListener('change', chargeFile)
