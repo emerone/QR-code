@@ -57,16 +57,48 @@ const divR = document.querySelector('.read div')
 const btnR = document.querySelector('.read button')
 const imgR = document.querySelector('.read img')
 const read = document.querySelector('.read')
+const textR = document.querySelector('.read p')
 
 const chargeFile = (e) => {
     console.log(e.target.files[0])
     file = e.target.files[0]
     if (!file) return
-
+    
     imgR.src = URL.createObjectURL(file)
+        
     divR.classList.remove('not-active')
 }
 
 divR.addEventListener('click', () => inpR.click() )
 
 inpR.addEventListener('change', chargeFile)
+
+// to change
+
+function fetchRequest(file, formData) {
+    textR.innerText = "Scanning QR Code..."
+    fetch("http://api.qrserver.com/v1/read-qr-code/", {
+        method: 'POST', body: formData
+    }).then(res => res.json()).then(result => {
+        result = result[0].symbol[0].data
+        textR.innerText = result ? "Upload QR Code to Scan" : "Couldn't scan QR Code"
+        if(!result) return
+        textR.innerText = result
+        imgR.src = URL.createObjectURL(file);
+    }).catch(() => {
+        textR.innerText = "Couldn't scan QR Code"
+    })
+}
+
+inpR.addEventListener("change", async e => {
+    let file = e.target.files[0]
+    if(!file) return
+    let formData = new FormData()
+    formData.append('file', file)
+    fetchRequest(file, formData)
+})
+
+copyBtn.addEventListener("click", () => {
+    let text = document.querySelector("textarea").textContent;
+    navigator.clipboard.writeText(text);
+})
