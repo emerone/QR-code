@@ -98,7 +98,6 @@ inpR.addEventListener("change", async e => {
     fetchRequest(file, formData)
 })
 
-copyBtn.addEventListener("click", () => {
-    let text = document.querySelector("textarea").textContent;
-    navigator.clipboard.writeText(text);
+btnR.addEventListener("click", () => {
+    navigator.clipboard.writeText(textR.textContent);
 })
